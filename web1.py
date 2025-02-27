@@ -1,25 +1,30 @@
-from gtts import gTTS as gt
 import streamlit as st
+from gtts import gTTS as gt
 
-try:
-    st.title("text to speech  convertor by coder-shivam ")
+st.title("Text to Speech Converter")
 
-    a=st.text_input("enter input")
+with st.form(key='text_to_speech_form'):
+    text_input = st.text_input("Enter text")
+    file_uploader = st.file_uploader("Choose a file", type=["txt"])
+    submit_button = st.form_submit_button(label='Convert')
 
-    c=gt(text=a,lang="en")
+if submit_button:
+    file_content = None
+    if file_uploader is not None:
+        file_content = file_uploader.read().decode("utf-8")
+
+    if text_input:
+        c = gt(text=text_input, lang="en")
+    elif file_content:
+        c = gt(text=file_content, lang="en")
+    else:
+        st.error("Please provide text or upload a file.")
+    
     c.save("web.mp3")
-
-    if a:
-        if c:
-            st.success("converted succesfully")
-            audio_file=open("web.mp3","rb")
-            audio=audio_file.read()
-            st.audio(audio,format='audio/ogg')
-
-        else:
-            st.error("please text another")
-except Exception as e:
-    print(e)
+    st.success("Converted successfully")
+    audio_file = open("web.mp3", "rb")
+    audio = audio_file.read()
+    st.audio(audio, format='audio/ogg')
 
 
 hide_menu = """
