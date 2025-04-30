@@ -27,10 +27,7 @@ if submit_button:
     st.audio(audio, format='audio/ogg')
 
 
-hide_menu = """
-<style>
-#MainMenu {visibility: hidden;}
-footer {visibility: hidden;}
+
 header {visibility: hidden;}
 </style>
 """
