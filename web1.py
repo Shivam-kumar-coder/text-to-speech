@@ -28,7 +28,4 @@ if submit_button:
 
 
 
-header {visibility: hidden;}
-</style>
-"""
-st.markdown(hide_menu, unsafe_allow_html=True)
+
